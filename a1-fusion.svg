@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="760" viewBox="0 0 1400 760" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1400" height="760" fill="#ffffff"/>
+  <text x="40" y="48" font-size="30" font-weight="700" fill="#111">Before: one channel, two searches, one array</text>
+  <rect x="40" y="80" width="300" height="70" rx="8" fill="#e8eef7" stroke="#3b5b8c" stroke-width="2"/>
+  <text x="190" y="110" text-anchor="middle" font-size="18" fill="#111">BM25 over symbol names</text>
+  <text x="190" y="135" text-anchor="middle" font-size="15" fill="#3b5b8c">up to 100 rows, 80 ms</text>
+  <rect x="40" y="170" width="300" height="70" rx="8" fill="#fdf1e3" stroke="#b46a1e" stroke-width="2"/>
+  <text x="190" y="200" text-anchor="middle" font-size="18" fill="#111">BM25 over documentation</text>
+  <text x="190" y="225" text-anchor="middle" font-size="15" fill="#b46a1e">up to 50 rows, 30 ms</text>
+  <path d="M340 115 L420 155" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M340 205 L420 175" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#555"/></marker></defs>
+  <rect x="430" y="80" width="420" height="160" rx="8" fill="#fafafa" stroke="#888" stroke-width="2"/>
+  <text x="640" y="108" text-anchor="middle" font-size="16" fill="#333" font-family="Menlo, monospace">hits.push(...symbolMatches)</text>
+  <text x="640" y="132" text-anchor="middle" font-size="16" fill="#333" font-family="Menlo, monospace">hits.push(...docMatches)</text>
+  <!-- array cells -->
+  <g font-size="13" font-family="Menlo, monospace">
+    <rect x="450" y="160" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="480" y="180" text-anchor="middle" fill="#111">sym 1</text>
+    <rect x="512" y="160" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="542" y="180" text-anchor="middle" fill="#111">sym 2</text>
+    <rect x="574" y="160" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="604" y="180" text-anchor="middle" fill="#111">...</text>
+    <rect x="636" y="160" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="666" y="180" text-anchor="middle" fill="#111">sym 100</text>
+    <rect x="698" y="160" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="728" y="180" text-anchor="middle" fill="#111">doc 1</text>
+    <rect x="760" y="160" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="790" y="180" text-anchor="middle" fill="#111">...</text>
+    <text x="480" y="215" text-anchor="middle" fill="#3b5b8c">rank 1</text>
+    <text x="640" y="215" text-anchor="middle" fill="#3b5b8c">rank 100</text>
+    <text x="745" y="215" text-anchor="middle" fill="#b46a1e" font-weight="700">rank 101</text>
+  </g>
+  <path d="M850 160 L930 160" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <rect x="940" y="80" width="420" height="160" rx="8" fill="#fafafa" stroke="#888" stroke-width="2"/>
+  <text x="1150" y="108" text-anchor="middle" font-size="16" fill="#333" font-family="Menlo, monospace">contribution = w / (k + rank), k = 60</text>
+  <text x="1150" y="150" text-anchor="middle" font-size="18" fill="#3b5b8c">best symbol: w / 61</text>
+  <text x="1150" y="185" text-anchor="middle" font-size="18" fill="#b46a1e" font-weight="700">best document: w / 161</text>
+  <text x="1150" y="220" text-anchor="middle" font-size="15" fill="#333">documents suppressed 2.6x, whatever their score</text>
+
+  <line x1="40" y1="300" x2="1360" y2="300" stroke="#ddd" stroke-width="2"/>
+  <text x="40" y="350" font-size="30" font-weight="700" fill="#111">After: two channels, two lists, two weights</text>
+  <rect x="40" y="382" width="300" height="70" rx="8" fill="#e8eef7" stroke="#3b5b8c" stroke-width="2"/>
+  <text x="190" y="412" text-anchor="middle" font-size="18" fill="#111">symbol_fts</text>
+  <text x="190" y="437" text-anchor="middle" font-size="15" fill="#3b5b8c">weight 0 for sentence-shaped intents</text>
+  <rect x="40" y="472" width="300" height="70" rx="8" fill="#fdf1e3" stroke="#b46a1e" stroke-width="2"/>
+  <text x="190" y="502" text-anchor="middle" font-size="18" fill="#111">doc_fts</text>
+  <text x="190" y="527" text-anchor="middle" font-size="15" fill="#b46a1e">its own per-intent weight</text>
+  <path d="M340 417 L420 417" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M340 507 L420 507" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <g font-size="13" font-family="Menlo, monospace">
+    <rect x="430" y="402" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="460" y="422" text-anchor="middle" fill="#111">sym 1</text>
+    <rect x="492" y="402" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="522" y="422" text-anchor="middle" fill="#111">sym 2</text>
+    <rect x="554" y="402" width="60" height="30" fill="#e8eef7" stroke="#3b5b8c"/><text x="584" y="422" text-anchor="middle" fill="#111">...</text>
+    <text x="460" y="455" text-anchor="middle" fill="#3b5b8c">rank 1</text>
+    <rect x="430" y="492" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="460" y="512" text-anchor="middle" fill="#111">doc 1</text>
+    <rect x="492" y="492" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="522" y="512" text-anchor="middle" fill="#111">doc 2</text>
+    <rect x="554" y="492" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="584" y="512" text-anchor="middle" fill="#111">...</text>
+    <text x="460" y="545" text-anchor="middle" fill="#b46a1e" font-weight="700">rank 1</text>
+  </g>
+  <path d="M620 417 L930 455" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <path d="M620 507 L930 475" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
+  <rect x="940" y="382" width="420" height="160" rx="8" fill="#fafafa" stroke="#888" stroke-width="2"/>
+  <text x="1150" y="410" text-anchor="middle" font-size="16" fill="#333" font-family="Menlo, monospace">contribution = w_c / (k + rank_c)</text>
+  <text x="1150" y="452" text-anchor="middle" font-size="18" fill="#3b5b8c">best symbol: w_s / 61</text>
+  <text x="1150" y="487" text-anchor="middle" font-size="18" fill="#b46a1e" font-weight="700">best document: w_d / 61</text>
+  <text x="1150" y="522" text-anchor="middle" font-size="15" fill="#333">documents compete on score and weight, not position</text>
+
+  <rect x="40" y="600" width="1320" height="120" rx="8" fill="#f4f7f4" stroke="#4a7c4e" stroke-width="2"/>
+  <text x="60" y="635" font-size="18" font-weight="700" fill="#2f5d33">62 documentation questions, lexical arm</text>
+  <text x="60" y="668" font-size="17" fill="#111">BCR 0.131 to 0.204    nDCG@10 0.102 to 0.209    MRR 0.087 to 0.186    R@10 0.173 to 0.272    p95 315 ms to 122 ms</text>
+  <text x="60" y="700" font-size="17" fill="#111">The embeddings arm reached BCR 0.185 on the same questions and failed its gate. The rank fix beat it with no index cost.</text>
+</svg>

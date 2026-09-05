@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" font-family="Helvetica, Arial, sans-serif">
+  <rect width="1400" height="820" fill="#fff"/>
+  <defs><marker id="a" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#555"/></marker></defs>
+  <text x="40" y="48" font-size="30" font-weight="700" fill="#111">Same dropped socket, two libraries, two outcomes</text>
+
+  <text x="60" y="100" font-size="22" font-weight="700" fill="#8a2c2c">kysely path: one shared pg.Pool, no listener</text>
+  <g font-size="16" fill="#111">
+    <rect x="60" y="120" width="240" height="64" rx="8" fill="#fdecec" stroke="#8a2c2c" stroke-width="2"/>
+    <text x="180" y="147" text-anchor="middle">idle client in pool</text><text x="180" y="170" text-anchor="middle" font-size="13" fill="#8a2c2c">idleListener attached</text>
+    <path d="M300 152 L340 152" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="345" y="120" width="240" height="64" rx="8" fill="#fdecec" stroke="#8a2c2c" stroke-width="2"/>
+    <text x="465" y="147" text-anchor="middle">socket dies</text><text x="465" y="170" text-anchor="middle" font-size="13" fill="#8a2c2c">keepalive notices the dead peer</text>
+    <path d="M585 152 L625 152" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="630" y="120" width="240" height="64" rx="8" fill="#fdecec" stroke="#8a2c2c" stroke-width="2"/>
+    <text x="750" y="147" text-anchor="middle" font-family="Menlo, monospace" font-size="14">pool.emit('error')</text><text x="750" y="170" text-anchor="middle" font-size="13" fill="#8a2c2c">Pool extends EventEmitter</text>
+    <path d="M870 152 L910 152" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="915" y="120" width="200" height="64" rx="8" fill="#fdecec" stroke="#8a2c2c" stroke-width="2"/>
+    <text x="1015" y="147" text-anchor="middle">no listener</text><text x="1015" y="170" text-anchor="middle" font-size="13" fill="#8a2c2c">uncaught exception</text>
+    <path d="M1115 152 L1155 152" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="1160" y="120" width="200" height="64" rx="8" fill="#8a2c2c" stroke="#8a2c2c" stroke-width="2"/>
+    <text x="1260" y="147" text-anchor="middle" fill="#fff" font-family="Menlo, monospace" font-size="14">process.exit(1)</text><text x="1260" y="170" text-anchor="middle" font-size="13" fill="#fff">every pod, within 3 minutes</text>
+  </g>
+
+  <text x="60" y="260" font-size="22" font-weight="700" fill="#2f5d33">knex path: a handler on every pg.Client</text>
+  <g font-size="16" fill="#111">
+    <rect x="60" y="280" width="240" height="64" rx="8" fill="#edf5ee" stroke="#2f5d33" stroke-width="2"/>
+    <text x="180" y="307" text-anchor="middle">idle client in tarn pool</text><text x="180" y="330" text-anchor="middle" font-size="13" fill="#2f5d33">client.on('error') attached by knex</text>
+    <path d="M300 312 L340 312" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="345" y="280" width="240" height="64" rx="8" fill="#edf5ee" stroke="#2f5d33" stroke-width="2"/>
+    <text x="465" y="307" text-anchor="middle">socket dies</text><text x="465" y="330" text-anchor="middle" font-size="13" fill="#2f5d33">same keepalive, same event</text>
+    <path d="M585 312 L625 312" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="630" y="280" width="240" height="64" rx="8" fill="#edf5ee" stroke="#2f5d33" stroke-width="2"/>
+    <text x="750" y="307" text-anchor="middle">client handler runs</text><text x="750" y="330" text-anchor="middle" font-size="13" fill="#2f5d33">no shared Pool EventEmitter</text>
+    <path d="M870 312 L910 312" stroke="#555" stroke-width="2" marker-end="url(#a)"/>
+    <rect x="915" y="280" width="445" height="64" rx="8" fill="#2f5d33" stroke="#2f5d33" stroke-width="2"/>
+    <text x="1137" y="307" text-anchor="middle" fill="#fff">connection discarded, process keeps running</text><text x="1137" y="330" text-anchor="middle" font-size="13" fill="#fff">restaurant and availability services survived</text>
+  </g>
+
+  <line x1="40" y1="400" x2="1360" y2="400" stroke="#ddd" stroke-width="2"/>
+  <text x="40" y="450" font-size="24" font-weight="700" fill="#111">Why now: the fleet-wide events and the crashes line up</text>
+  <g font-size="16" font-family="Menlo, monospace">
+<text x="60" y="490" fill="#111" font-weight="700">day</text><text x="380" y="490" fill="#111" font-weight="700" text-anchor="middle">services losing AMQP</text><text x="620" y="490" fill="#111" font-weight="700" text-anchor="middle">offers service crashes</text>
+<text x="60" y="520" fill="#111">day 1</text><text x="380" y="520" fill="#111" text-anchor="middle">13</text><text x="620" y="520" fill="#111" text-anchor="middle">0</text>
+<text x="60" y="546" fill="#111">day 2</text><text x="380" y="546" fill="#111" text-anchor="middle">11</text><text x="620" y="546" fill="#111" text-anchor="middle">0</text>
+<text x="60" y="572" fill="#8a2c2c" font-weight="700">crash day 1</text><text x="380" y="572" fill="#8a2c2c" font-weight="700" text-anchor="middle">93</text><text x="620" y="572" fill="#8a2c2c" font-weight="700" text-anchor="middle">30</text>
+<text x="60" y="598" fill="#111">day 4</text><text x="380" y="598" fill="#111" text-anchor="middle">12</text><text x="620" y="598" fill="#111" text-anchor="middle">0</text>
+<text x="60" y="624" fill="#111">day 5</text><text x="380" y="624" fill="#111" text-anchor="middle">12</text><text x="620" y="624" fill="#111" text-anchor="middle">0</text>
+<text x="60" y="650" fill="#8a2c2c" font-weight="700">crash day 2</text><text x="380" y="650" fill="#8a2c2c" font-weight="700" text-anchor="middle">91</text><text x="620" y="650" fill="#8a2c2c" font-weight="700" text-anchor="middle">14</text>
+</g>
+  <g font-size="16" fill="#111">
+    <text x="760" y="490" font-weight="700">Blast radius: two instruments, two answers</text>
+    <text x="760" y="525">SBOM lists kysely:</text><text x="1140" y="525" font-weight="700" text-anchor="end">152 services</text>
+    <text x="760" y="552">reason: the shared library depends on kysely and knex</text>
+    <text x="760" y="590">code search for useKysely: true:</text><text x="1140" y="590" font-weight="700" text-anchor="end">10 services</text>
+    <text x="760" y="617">reason: the opt-in is in each service's createService call</text>
+    <text x="760" y="655" fill="#2f5d33" font-weight="700">Fix: pool.on('error', onPoolError) in the shared library</text>
+    <text x="760" y="680">One line, ten services, next dependency bump.</text>
+  </g>
+  <rect x="40" y="720" width="1320" height="70" rx="8" fill="#fafafa" stroke="#888" stroke-width="2"/>
+  <text x="60" y="748" font-size="16" fill="#333">Keepalive turned a silent dead socket into a detected one. Detection is what reached the unguarded event. Inferred, not log-proven: retention ended before the upgrade.</text>
+  <text x="60" y="774" font-size="16" fill="#333">Rolling back keepalive would hide the crash and bring back the silently dead connections it was written to catch.</text>
+</svg>
