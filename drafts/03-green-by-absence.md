@@ -7,7 +7,7 @@ Five incidents, four repositories, one shape. A pipeline step looked green becau
 
 In one open source Angular library, the Codecov upload step had `continue-on-error: true` and `fail_ci_if_error: false`. Codecov rejected every upload with `Token required because branch is protected`, and the step still reported success on every run.
 
-What looked green was the upload step itself. What was happening was simple: no token, rejected upload, green exit.
+What looked green was the upload step. What was happening: the upload reached Codecov without a token, was rejected, and the step exited green anyway.
 
 It hid from pull request `361` to pull request `370`. That is nine pull requests merged before anyone noticed. The coverage badge just stopped moving.
 
@@ -36,11 +36,11 @@ I compared three workflow runs. One was before the changeset job existed, and pu
 The fix was one line. In this dependency graph the condition needed `!cancelled()` and an explicit `needs.<job>.result == 'success'` check, because the job it depends on is legitimately skipped on push.
 
 ```yaml
-if: needs.x.outputs.should-publish == 'true'
+if: ${{ needs.x.outputs.should-publish == 'true' }}
 ```
 
 ```yaml
-if: !cancelled() && needs.x.result == 'success' && needs.x.outputs.should-publish == 'true'
+if: ${{ !cancelled() && needs.x.result == 'success' && needs.x.outputs.should-publish == 'true' }}
 ```
 
 ## A planner can plan zero and still hide a missed release
@@ -51,7 +51,7 @@ Three release scripts each carried their own copy of the published-package list.
 
 The failure hid because an empty plan is also a valid result after a successful publish. A rerun after a real publish correctly plans nothing. So the same zero can mean success or blindness.
 
-There was no error anywhere. The fix was one list in one module imported by all three scripts, and a test that the list matches the workspace.
+There was no error anywhere. The fix was one list in one module imported by all three scripts, and a test that plans a release for every package in that list and fails, naming the package, when one would publish without a release.
 
 ## A cleanup job can exit 0 before it touches anything
 
@@ -63,7 +63,7 @@ Four things made a green run fail to complete the cleanup. The CSV held the wron
 
 A group with fewer than 1000 documents was emptied and looked like proof the job worked. A group with more was left partly deleted. One measured group had 3609 documents: 2483 after the scheduled run, 1483 after one manual call, and back to 3609 after re-indexing in about 90 seconds.
 
-The deleted count existed in exactly one place, a worker log line `Deleted N documents`, and even that count does not prove the job finished: the partial deletions logged a count too. The check that works is the group's document count after the run against the expected state. The permission was granted, and the upstream cause, a stale weekly restore, was fixed separately.
+The deleted count existed in exactly one place, a worker log line `Deleted N documents`, and even that count does not prove the job finished: the partial deletions logged a count too. The check that works is the group's document count after the run against the expected state. The permission grant is a pending change, and the upstream cause, a stale weekly restore, was fixed separately.
 
 ## CI can be absent and still look like it is waiting
 
@@ -71,7 +71,7 @@ In the backend API, the CI workflow declared `pull_request: branches: [master]`.
 
 There was a second layer. A Makefile target, `make test-unit`, was a stub that echoed `NOT_FOUND`. The real command was `npm run test:unit`. Two layers of "looks like it ran".
 
-The fix was to run CI on all pull requests, or at least say in the PR body that it does not run and validate locally.
+The workaround was to say in the PR body that CI does not run on that base and to validate locally. The fix, running CI on every pull request, is still pending.
 
 ## Two one-liners carry the same shape
 
