@@ -23,7 +23,7 @@
     <rect x="760" y="160" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="790" y="180" text-anchor="middle" fill="#111">...</text>
     <text x="480" y="215" text-anchor="middle" fill="#3b5b8c">rank 1</text>
     <text x="640" y="215" text-anchor="middle" fill="#3b5b8c">rank 100</text>
-    <text x="760" y="215" text-anchor="middle" fill="#b46a1e" font-weight="700">rank 101, when 100 symbols precede it</text>
+    <text x="745" y="215" text-anchor="middle" fill="#b46a1e" font-weight="700">rank 101</text><text x="640" y="233" text-anchor="middle" fill="#b46a1e" font-size="12">when the symbol search returns its full 100 rows</text>
   </g>
   <path d="M850 160 L930 160" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
   <rect x="940" y="80" width="420" height="160" rx="8" fill="#fafafa" stroke="#888" stroke-width="2"/>
