@@ -37,16 +37,16 @@
   </g>
 
   <line x1="40" y1="400" x2="1360" y2="400" stroke="#ddd" stroke-width="2"/>
-  <text x="40" y="450" font-size="24" font-weight="700" fill="#111">Why now: the fleet-wide events and the crashes line up</text>
-  <g font-size="16" font-family="Menlo, monospace">
-<text x="60" y="490" fill="#111" font-weight="700">day</text><text x="380" y="490" fill="#111" font-weight="700" text-anchor="middle">services losing AMQP</text><text x="620" y="490" fill="#111" font-weight="700" text-anchor="middle">offers service crashes</text>
-<text x="60" y="520" fill="#111">day 1</text><text x="380" y="520" fill="#111" text-anchor="middle">13</text><text x="620" y="520" fill="#111" text-anchor="middle">0</text>
-<text x="60" y="546" fill="#111">day 2</text><text x="380" y="546" fill="#111" text-anchor="middle">11</text><text x="620" y="546" fill="#111" text-anchor="middle">0</text>
-<text x="60" y="572" fill="#8a2c2c" font-weight="700">crash day 1</text><text x="380" y="572" fill="#8a2c2c" font-weight="700" text-anchor="middle">93</text><text x="620" y="572" fill="#8a2c2c" font-weight="700" text-anchor="middle">30</text>
-<text x="60" y="598" fill="#111">day 4</text><text x="380" y="598" fill="#111" text-anchor="middle">12</text><text x="620" y="598" fill="#111" text-anchor="middle">0</text>
-<text x="60" y="624" fill="#111">day 5</text><text x="380" y="624" fill="#111" text-anchor="middle">12</text><text x="620" y="624" fill="#111" text-anchor="middle">0</text>
-<text x="60" y="650" fill="#8a2c2c" font-weight="700">crash day 2</text><text x="380" y="650" fill="#8a2c2c" font-weight="700" text-anchor="middle">91</text><text x="620" y="650" fill="#8a2c2c" font-weight="700" text-anchor="middle">14</text>
-</g>
+  <text x="40" y="450" font-size="24" font-weight="700" fill="#111">Why now: the two fleet-wide events are the two crash days</text>
+  <g font-size="14" font-family="Menlo, monospace" fill="#111">
+    <text x="60" y="486" font-weight="700">                 AMQP disconnects      offers service exits</text>
+    <text x="60" y="506" font-weight="700">                 window   whole day    window          whole day</text>
+    <text x="60" y="534" fill="#8a2c2c" font-weight="700">first morning    64       93           24 (17 pods)    30</text>
+    <text x="60" y="560" fill="#8a2c2c" font-weight="700">second morning   79       91           14 (13 pods)    14</text>
+    <text x="60" y="586">ordinary day              11 to 13                     0</text>
+    <text x="60" y="622" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#555">window: the 3 to 4 minutes of the event. exits: container exits, not distinct pods.</text>
+    <text x="60" y="644" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#555">Some pods came back and died again. Blips of 4 to 13 services never crash anything.</text>
+  </g>
   <g font-size="16" fill="#111">
     <text x="760" y="490" font-weight="700">Blast radius: two instruments, two answers</text>
     <text x="760" y="525">SBOM lists kysely:</text><text x="1140" y="525" font-weight="700" text-anchor="end">152 services</text>

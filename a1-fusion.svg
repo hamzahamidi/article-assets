@@ -23,7 +23,7 @@
     <rect x="760" y="160" width="60" height="30" fill="#fdf1e3" stroke="#b46a1e"/><text x="790" y="180" text-anchor="middle" fill="#111">...</text>
     <text x="480" y="215" text-anchor="middle" fill="#3b5b8c">rank 1</text>
     <text x="640" y="215" text-anchor="middle" fill="#3b5b8c">rank 100</text>
-    <text x="745" y="215" text-anchor="middle" fill="#b46a1e" font-weight="700">rank 101</text>
+    <text x="760" y="215" text-anchor="middle" fill="#b46a1e" font-weight="700">rank 101, when 100 symbols precede it</text>
   </g>
   <path d="M850 160 L930 160" stroke="#555" stroke-width="2" fill="none" marker-end="url(#a)"/>
   <rect x="940" y="80" width="420" height="160" rx="8" fill="#fafafa" stroke="#888" stroke-width="2"/>
@@ -63,5 +63,5 @@
   <rect x="40" y="600" width="1320" height="120" rx="8" fill="#f4f7f4" stroke="#4a7c4e" stroke-width="2"/>
   <text x="60" y="635" font-size="18" font-weight="700" fill="#2f5d33">62 documentation questions, lexical arm</text>
   <text x="60" y="668" font-size="17" fill="#111">BCR 0.131 to 0.204    nDCG@10 0.102 to 0.209    MRR 0.087 to 0.186    R@10 0.173 to 0.272    p95 315 ms to 122 ms</text>
-  <text x="60" y="700" font-size="17" fill="#111">The embeddings arm reached BCR 0.185 on the same questions and failed its gate. The rank fix beat it with no index cost.</text>
+  <text x="60" y="700" font-size="17" fill="#111">On the broken baseline, embeddings reached 0.185. The ranker fix alone reached 0.204. Embeddings on the fixed baseline reached 0.240, CI includes zero.</text>
 </svg>
